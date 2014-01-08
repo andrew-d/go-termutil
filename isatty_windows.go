@@ -1,6 +1,6 @@
 // +build windows
 
-package isatty
+package termutil
 
 import (
     "os"

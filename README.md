@@ -1,6 +1,6 @@
-# go-isatty
+# go-termutil
 
-This package exposes a single useful function:
+This package exposes some very baic, useful functions:
 
     Isatty(file *os.File) bool
 

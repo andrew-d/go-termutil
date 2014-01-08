@@ -1,6 +1,6 @@
 // +build linux
 
-package isatty
+package termutil
 
 import (
     "os"

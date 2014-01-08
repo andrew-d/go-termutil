@@ -1,6 +1,6 @@
 // +build !windows,!linux,!darwin,!freebsd,!cgo
 
-package isatty
+package termutil
 
 import "os"
 

@@ -1,6 +1,6 @@
 // +build darwin freebsd
 
-package isatty
+package termutil
 
 import (
     "os"
