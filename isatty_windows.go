@@ -31,5 +31,5 @@ func getConsoleMode(hConsoleHandle syscall.Handle, lpMode *uint32) error {
             return syscall.EINVAL
         }
     }
-    return
+    return nil
 }
