@@ -9,6 +9,6 @@ import "C"
 
 import "os"
 
-func Isatty(file *os.File) bool {
-    return int(C.isatty(C.int(file.Fd()))) != 0
+func Isatty(fd uintptr) bool {
+    return int(C.isatty(C.int(fd))) != 0
 }

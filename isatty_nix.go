@@ -1,18 +1,17 @@
-// +build linux
+// +build linux darwin freebsd
 
 package termutil
 
 import (
-    "os"
     "syscall"
     "unsafe"
 )
 
-func Isatty(file *os.File) bool {
+func Isatty(fd uintptr) bool {
     var termios syscall.Termios
 
-    _, _, err := syscall.Syscall6(syscall.SYS_IOCTL, file.Fd(),
-        uintptr(syscall.TCGETS),
+    _, _, err := syscall.Syscall6(syscall.SYS_IOCTL, fd,
+        uintptr(ioctlReadTermios),
         uintptr(unsafe.Pointer(&termios)),
         0,
         0,

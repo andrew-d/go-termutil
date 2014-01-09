@@ -13,9 +13,9 @@ var (
     fGetConsoleMode = kernel32.MustFindProc("GetConsoleMode")
 )
 
-func Isatty(file *os.File) bool {
+func Isatty(fd uintptr) bool {
     var x uint32
-    return getConsoleMode(syscall.Handle(file.Fd()), &x) == nil
+    return getConsoleMode(syscall.Handle(fd), &x) == nil
 }
 
 func getConsoleMode(hConsoleHandle syscall.Handle, lpMode *uint32) error {

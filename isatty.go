@@ -4,6 +4,6 @@ package termutil
 
 import "os"
 
-func Isatty(file *os.File) bool {
+func Isatty(fd uintptr) bool {
     panic("Not implemented")
 }
