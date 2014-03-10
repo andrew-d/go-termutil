@@ -4,6 +4,7 @@ package termutil
 
 import (
 	"syscall"
+	"io"
 )
 
 var (
@@ -41,7 +42,7 @@ func GetPass(prompt string, prompt_fd, input_fd uintptr) ([]byte, error) {
 	written := 0
 	buf := []byte(prompt)
 	for written < len(prompt) {
-		n, err := syscall.Write(prompt_fd, buf[written:])
+		n, err := syscall.Write(syscall.Handle(prompt_fd), buf[written:])
 		if err != nil {
 			return nil, err
 		}
@@ -54,7 +55,7 @@ func GetPass(prompt string, prompt_fd, input_fd uintptr) ([]byte, error) {
 
 	// Write a newline after we're done, since it won't be echoed when the
 	// user presses 'Enter'.
-	defer syscall.Write(prompt_fd, []byte("\r\n"))
+	defer syscall.Write(syscall.Handle(prompt_fd), []byte("\r\n"))
 
 	// Read the characters
 	var chars []uint16
