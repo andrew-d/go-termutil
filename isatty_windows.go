@@ -3,7 +3,6 @@
 package termutil
 
 import (
-    "os"
     "syscall"
     "unsafe"
 )
