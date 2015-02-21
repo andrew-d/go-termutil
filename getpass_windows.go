@@ -61,7 +61,7 @@ func GetPass(prompt string, prompt_fd, input_fd uintptr) ([]byte, error) {
 	var chars []uint16
 	for {
 		ret, _, _ := syscall.Syscall(f_getwch, 0, 0, 0, 0)
-		if ret == 0x0010 || ret == 0x0013 {
+		if ret == 0x000A || ret == 0x000D {
 			break
 		} else if ret == 0x0008 {
 			chars = chars[0:len(chars)-2]
