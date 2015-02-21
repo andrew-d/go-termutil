@@ -9,33 +9,11 @@ import (
 )
 
 var (
-	f_putwch uintptr // wint_t _putwch(wchar_t c)
 	f_getwch uintptr // wint_t _getwch(void)
 )
 
 func init() {
-	msvcrt := loadLibrary("msvcrt.dll")
-
-	f_putwch = getProcAddress(msvcrt, "_putwch")
-	f_getwch = getProcAddress(msvcrt, "_getwch")
-}
-
-func loadLibrary(name string) uintptr {
-	lib, err := syscall.LoadLibrary(name)
-	if err != nil {
-		panic(err)
-	}
-
-	return uintptr(lib)
-}
-
-func getProcAddress(library uintptr, name string) uintptr {
-	addr, err := syscall.GetProcAddress(syscall.Handle(library), name)
-	if err != nil {
-		panic(err)
-	}
-
-	return uintptr(addr)
+	f_getwch = syscall.MustLoadDLL("msvcrt.dll").MustFindProc("_getwch").Addr()
 }
 
 func GetPass(prompt string, prompt_fd, input_fd uintptr) ([]byte, error) {
